@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container ">
+   
+    <div class="col-sm-6 mx-auto">
+         <div class="alert alert-primary text-center" role="alert">
+          <h5>Update Student Record</h5>
+        </div>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {{registrationUpdateForm.as_p}}
+        <button class="btn btn-primary" type="submit">Update Record</button>
+        <a class="btn btn-warning" type="button" href="/">Back Home</a>
+        </form>
+       
+    </div>
+
+</div>
+{% endblock content %}

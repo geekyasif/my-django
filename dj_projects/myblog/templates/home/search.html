@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{%block title %} Search results - {{query}}{% endblock title %}
+{% block blog_active %} active {% endblock blog_active %}
+
+  {% block body %}
+    <h2 class="my-3">Search results: </h2>
+     {% if allPosts|length < 1 %}
+     <p>No Results Found!</p>
+     <p>Your search - <b>{{query}}</b> - did not match any documents.</p>
+     <p>Suggestions:</p>
+     <ul>
+     <li>Try different keywords.</li>
+     <li>Try more general keywords.</li>
+     <li>Try fewer keywords.</li>
+     <li>Make sure that all words are spelled correctly.</li>
+</ul>
+
+    {% endif %}
+
+    <div class="posts">
+   
+
+      {% for post in allPosts %}
+        <div class="card mb-3 border-0 my-4" style="max-width: 740px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="https://source.unsplash.com/300x300/?linux,scripting,hacking" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h4 class="card-title">{{post.title}}</h4>
+                <p class="card-text font-weight-light">{{post.content|truncatechars:190}}</p>
+                <a href="/blog/{{post.slug}}" class="btn btn-secondary">Continue reading »</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      
+    </div>
+  {% endblock body %}

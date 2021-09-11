@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block title %} icoders - Home {% endblock title %}
+{% block home_active %} active
+{% endblock home_active %}
+
+{% block body %}
+
+<div class="container  my-5 text-center">
+  <h1 class="display-4">iCoders Blog</h1>
+  <p class="lead">Learn about programmings and latest technologies</p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h1 class="text-center d-block bg-light text-dark lead py-3 my-3"><b>Latest Post</b></h1>
+      {% for post in post %}
+      <div class="card mb-3 border-0">
+        <div class="card-body">
+          <a href="/category/{{post.category.slug}}/{{post.slug}}">
+            <h3 class="card-title">{{post.title}}</h3>
+          </a>
+          <a class="lead text-secondary" href="category/{{post.category.slug}}">{{post.category}}</a> ,
+          {{post.timestamp}}
+          <p class="card-text">{{post.content|safe |slice:':300'}}</p>
+          {% comment %} <a class="my-0" href="/category/{{post.category.slug}}/{{post.slug}}">Read more</a>
+          {% endcomment %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="col-sm-4">
+      <div class="recent_post mb-4">
+        <h1 class="text-center d-block bg-light text-dark lead py-3 my-3"><b>Recent Post</b></h1>
+        {% for post in post %}
+
+        <ul>
+          <li>
+            <a class=" text-secondary text-decoration-none" href="/category/{{post.category.slug}}/{{post.slug}}">
+              {{post.title}}</a>
+          </li>
+        </ul>
+
+        {% endfor %}
+      </div>
+
+
+      <div class="category my-5">
+        <h1 class="text-center d-block bg-light text-dark lead py-3 my-3"><b>Categories</b></h1>
+        <ul>
+          {% for category in category %}
+          <li> <a class="lead text-secondary text-decoration-none"
+              href="/category/{{category.slug}}">{{category.name}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock body %}

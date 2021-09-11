@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+
+   {% block title %}
+     {{post.slug}}
+   {% endblock title %}
+
+   {% block body %}
+
+   <div class=" container my-4 col-sm-6">
+
+      <div class="post">
+       <h2 class="text-primary">{{post.title}} </h2>
+        <a class="lead text-secondary" href="/category/{{post.category.slug}}">{{post.category}}</a> , {{post.timestamp}} <br>
+        <div class="fb-like  my-2" data-href="http://127.0.0.1:8000/category/{{post.category.slug}}/{{post.title}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+        <p class="card-text">{{post.content|safe}}</p>
+      </div>
+
+     
+        {% comment %} <div class="fb-comments mt-5" data-href="http://127.0.0.1:8000/category/{{post.category.slug}}/{{post.sno}}" data-numposts="10" data-width=""></div> {% endcomment %}
+
+          <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                
+                var disqus_config = function () {
+                this.page.url = "http://127.0.0.1:8000/category/{{post.category.slug}}/{{post.title}}";  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = "{{post.title}}";  // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                this.language = "en_IN";
+                };
+              
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://127-0-0-1-8000.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+   
+   </div>
+
+   {% endblock body %}
+     
+  

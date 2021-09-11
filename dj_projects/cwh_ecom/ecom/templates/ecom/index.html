@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+{% block title %} Products - E-com {% endblock title%}
+{% load static %}
+{% block css %}
+.col-md-3 {
+   display: inline-block;
+  margin-left:-4px;
+ }
+.carousel-indicators .active { 
+  background-color: blue; 
+}
+.col-md-3 img{ 
+  width: 150px; height: 150px; margin-left: 44px; padding: 21px; 
+}
+body .carousel-indicator li{ 
+  background-color: blue; 
+} 
+body .carousel-indicators{ 
+  bottom: 0; 
+} 
+body .carousel-control-prev-icon, body .carousel-control-next-icon{ 
+  background-color: blue; 
+} 
+body .no-padding{
+  padding-left: 0, padding-right: 0; 
+}
+.card{ 
+  text-align: center; 
+}
+.card-body h5{
+  font-size: 14px; 
+}
+.carousel-control-prev, .carousel-control-next{ 
+  top: auto;
+  bottom: auto; 
+}
+.items{ 
+  margin: 20px 0px; 
+  display: flex; 
+  overflow: auto; 
+}
+.item{ 
+  text-align: center; 
+  border: 1px solid slategray;
+  width: 227px; 
+  height: 340px; 
+  padding: 10px 10px; 
+  margin: 10px 10px; }
+.item-img{ 
+  width: 175px; 
+  margin: 16px 0px; 
+  height: 130px; }
+
+  .popover-body {
+    padding: 9px;
+    color: #212529;
+}
+{% endblock css %}
+{%block content %}
+<div class="container-fluid my-4">
+  {% for products, range, nSlides in allProducts %}
+
+  <h3>{{products.0.category}}</h3>
+  <div class="items">
+    {% for p in products %}
+
+    <div class="item">
+      <img class="item-img" src="media/{{p.product_image}}" alt="" />
+      <h6 id="product_name{{p.product_id}}">{{p.product_name|truncatechars:50}}</h6>
+      <p>{{p.product_price}}</p>
+      <span id="updateCartDiv{{p.product_id}}" class="updateCartDiv">
+                <button id="{{p.product_id}}" class="btn btn-primary btn-small cartBtn">
+                  Add To Cart
+                </button>
+      </span>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock content %} {% block js %}
+<script>
+
+  // setting local storage for cart to get items
+  if (localStorage.getItem("cart") == null) {
+    var cart = {};
+  } else {
+    cart = JSON.parse(localStorage.getItem("cart"));
+    document.getElementById("cart").innerHTML = "Cart " + "(" + Object.keys(cart).length + ")";
+  updateCart(cart);
+
+  }
+
+  // getting product id and setting to the cart
+  $(".updateCartDiv").on("click", "button.cartBtn" ,function () {
+    var pro_id = this.id.toString();
+    if (cart[pro_id] == undefined) {
+      cart[pro_id] = 1;
+    } 
+    else {
+      cart[pro_id] = cart[pro_id] + 1;
+    }
+    updateCart(cart)
+  });
+
+  // cart popover bootstrap cdn
+  $("#cart").popover();
+  updatePopoverCart(cart)
+  function updatePopoverCart(cart){
+
+    let itemStr = ""
+    let len = 1
+    itemStr = itemStr + "<h4 class='text-center text-primary'>Items In Cart </h4>"
+    for(item in cart){
+        cartItem = "<br>" + "<b>" + len+". " + "</b>" +  document.getElementById('product_name'+item).innerHTML.slice(0,25) + "... Qty : " + cart[item] + "</br>"
+        itemStr = itemStr + cartItem
+        len = len + 1
+    }
+    itemStr = itemStr + `<div class="checkout-div text-center mt-3">
+                            <a href="/checkout" class="btn btn-sm btn-primary checkoutBtn mx-2" id="checkoutBtn">Checkout</a>
+                            <a class="btn btn-sm btn-primary clearCartBtn" onclick="clearCart()" id="clearCartBtn">Clear Cart</a>
+                          </div>`
+    document.getElementById("cart").setAttribute("data-content",itemStr);
+    //$("#cart").popover('show');
+
+  }
+
+  function clearCart(){
+    cart = JSON.parse(localStorage.getItem("cart"));
+    for( let item in cart){
+            document.getElementById("updateCartDiv"+item).innerHTML = `<button id="${item}" class="btn btn-primary btn-small cartbtn">Add To Cart</button>`
+
+    }
+
+    localStorage.clear()
+    cart = {}
+    updateCart(cart)
+    location.reload()
+
+  }
+
+
+// creating a fucntion to increase or decrase the product quantity
+
+    function updateCart(cart){
+      for(item in cart){
+      updateCartDiv = document.getElementById('updateCartDiv'+item);
+      updateCartDiv.innerHTML = `<button class="btn btn-primary minus" id="minus${item}">-</button>
+                                 <span id="var${item}">${cart[item]}</span>
+                                  <button class="btn btn-primary plus" id="plus${item}">+</button>
+                                  `
+      }
+       localStorage.setItem("cart", JSON.stringify(cart));
+       document.getElementById("cart").innerHTML = "Items in cart " + "(" + Object.keys(cart).length + ")";
+       updatePopoverCart(cart)
+       
+    }
+
+// decreasing the  function bases on click
+    $('.updateCartDiv').on("click", "button.minus", function(){
+      let item = this.id.slice(5,)
+      console.log("minus btn clicked " + item)
+      cart[item] = cart[item] - 1
+      cart[item] = Math.max(0, cart[item])
+      document.getElementById('var' + item).innerHTML = cart[item]
+      updateCart(cart)
+      
+
+    })
+// increasing the product item on plus click btn
+       $('.updateCartDiv').on("click", "button.plus", function(){
+      let item = this.id.slice(4,)
+      console.log("plus btn clicked "+ item)
+      cart[item] = cart[item] + 1
+      document.getElementById('var' + item).innerHTML = cart[item]
+      updateCart(cart)
+    })
+
+
+  function showItemInCart(){}
+
+</script>
+
+{% endblock js %}

@@ -1,0 +1,57 @@
+Click here to view details of Screening Task
+
+Screening Task
+
+Note: Please make sure that the Python Test Result in the Shortlisting Stage (on the yaksh.fossee.in website) mentions Passed in order to start the Screening Task. You can only attempt this Screening Task if your test result specifies Passed.
+
+Description:
+
+This project is to gauge the backend skills of you by creating a simple server that manages Theatre occupancy.
+
+You are expected to use Python with Django and Django REST Framework (you are allowed to write the API in pure Django if you wish to do so). Apart from this you can not use any other libraries or databases.
+
+You are building an application for a new theatre in town. Your backend application is supposed to be used by users in the theatre to gauge and manage occupancy. The theatre is a new Arena theatre for live performances and does not assign fixed seating number assignments to its patrons. You will design 3 API endpoints as mentioned below:
+
+Occupy seat - [Endpoint URL - /occupy/ ] The Endpoint will be given the person's name and ticket ID (this should be a UUID field, tickets will not contain information about the seat number beforehand) as input and outputs the seat number which will be occupied. If the seating is full, the appropriate error message is returned.
+
+Vacate seat - [Endpoint URL - /vacate/ ]: This endpoint takes the seat number which the person will be vacating and frees that slot up to be used by other people.
+
+Get Person/Seat information - [Endpoint URL - /get_info/<NAME or SEATNUM or TICKETID> ]: This endpoint can take either the seat number or person’s name or ticket ID for the input and returns the person’s name, ticket ID, and slot number.
+
+Additional Notes:
+
+You are expected to use Python with Django and Django REST Framework (you are allowed to write the API in pure Django if you wish to do so). Apart from this, you can not use any other libraries or databases.
+
+Do not use any authentication techniques.
+
+The theatre occupancy size is specified by the variable MAX_OCCUPANCY in the Django project settings file which you should create in the code base and we can change that when we are starting the server.
+
+If you feel that there is some information missing from the document, you are expected to take a decision on that by yourself and specify your assumptions in your README
+
+Instructions:
+
+Once you have completed your task, add the parent folder to a ZIP file and upload to Moodle
+
+Commit your code at regular intervals by doing small incremental changes to your code (committing huge blobs of code all at once is not recommended).
+
+The steps in “Description” above are general, minimum, and mandatory guidelines.
+
+Include a file called README that will include the documentation.
+
+Include a file called requirements.txt that lists all the libraries (including Django) and modules/plugins and their versions.
+
+Please stick to the generic URL patterns as specified above In case you are using your own URL patterns, please specify the root URL and the subsequent URL patterns clearly in the documentation.
+
+You are not allowed to use pre-built third-party Django Apps.
+
+Evaluation:
+
+Availability, Accuracy, and Clarity of Documentation
+
+Quality and Extent of Test Cases
+
+Quality of Code
+
+Adherence to Coding Standards (For example - Code must be Pythonic and follow PEP8 standards)
+
+Last modified: Monday, 8 February 2021, 11:00 AM

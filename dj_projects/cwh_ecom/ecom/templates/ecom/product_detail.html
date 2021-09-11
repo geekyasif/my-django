@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}{{product.product_name}} | E-com{% endblock title %}
+
+{% block content %}
+
+<div class="container my-4">
+
+    <div class="product_detail">
+        <div class="row">
+            <div class="col">
+                <img src="/media/{{product.product_image}}" alt="">
+            </div>
+            <div class="col">
+                <h1>{{product.product_name}}</h1>
+                <h5>{{product.sub_category}}</h5>
+                <h6>Rs {{product.product_price}}</h6>
+                <p>{{product.product_detail}}</p>
+                <button class="btn btn-primary">Buy Now</button>
+                <button id="product_id{{product.product_id}}" class="btn btn-primary cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

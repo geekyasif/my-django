@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{%block title %} WebDevCode - Home {% endblock title %}
+
+{% block home_active %} active {% endblock home_active %}
+
+  {% block body %}
+       
+       <div class="container my-4">
+         <div class="row">
+             <div class="col-md-6">
+             <h1 class="display-4">Hi, I’m a Tutor on WebDevCode </h1>
+             <p class="lead text-secondary my-3">FIND ALL INFORMATION RELATED TO COMPUTER SCIENCE.</p>
+             <p class="text-secondary  my-4">WebDevCode is a platform where students can gain information about Computer Science and Web Development.WebDevCode provides simple and easy notes and you will find numerous subjects related to computer science such as programming in C, Programming in C++, Computer Networks, Management Information System, Visual Basic, And System Analysis and Design and many more.</p>
+              <a class="btn btn-outline-danger mt-3" href="#" role="button">Explore Blog</a>
+             </div>
+             <div class="col-md-6">
+             <img src="/static/images/mainlogo.png" alt="">
+             </div>
+         </div>
+       </div>
+
+    {% comment %} <div class="jumbotron container bg-white text-center ">
+      <h1 class="display-4">Welcome To WebDevCode</h1>
+      <p class="lead">This blog is about ethical hacking, computer programming, computer security, exploits the weakness in a computer system or computer network, modify computer appearance in (windows), Notepad tricks, modify games and how to plays with the codings of reg, bat, VBS, jar, HTML, PHP etc.</p>
+      <a class="btn btn-danger mt-3" href="#" role="button">Explore Blog</a>
+    </div> {% endcomment %}
+
+     <div class="latestPost bg-light">
+<div class="container pb-5">
+
+             <div class="latestPostHeading pb-2 pt-5">
+               <h2 class="text-center ">Latest Blog Posts</h2>
+               
+             </div>
+
+    <div class="row mx-4">
+
+      {% for post in allPosts %}
+        <div class="col-md-4 mt-4  ">
+          <div class="card  py-3 px-3" style="width: 18rem;">
+              <img src="/media/{{post.image}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                {% comment %} <a  class="text-dark" href="/blog/{{post.slug}}"><h6 class="card-title">{{post.title |truncatechars:70 }}</h6></a> {% endcomment %}
+                <a href="/blog/{{post.slug}}"> <p class=" text-monospace  text-dark card-title mb-2"> {{post.title |truncatechars:65 }}</p></a>
+                {% comment %} <p class="card-text font-weight-light">{{post.content |truncatechars:100}}</p> {% endcomment %}
+                {% comment %} <p  "font-weight-light"></p> {% endcomment %}
+                <p><small class="card-text text-secondary ">{{post.content |truncatechars:100}}</small></p>
+                <a href="/blog/{{post.slug}}" class="text-decoration-none text-dark float-right ">Continue reading »</a>
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+
+   </div>
+</div>
+     </div>
+  {% endblock body %}

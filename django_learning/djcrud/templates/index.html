@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+<div class="container">
+
+<div class="row">
+
+        <div class="col-sm-4">
+    <div class="alert alert-primary text-center" role="alert">
+  <h5>Add Student Records</h5>
+</div>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {{registrationForm.as_p}}
+        <button class="btn btn-primary " type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div class="col-sm-8">
+        <div class="alert alert-primary text-center" role="alert">
+          <h5>All Students Records</h5>
+        </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">FULL NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">PASSWORD</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+
+    {% for s in allRecords %}
+    <tr>
+      <th scope="row">{{s.id}}</th>
+      <td>{{s.name}}</td>
+      <td>{{s.email}}</td>
+      <td>{{s.password}}</td>
+      <td><a href="{% url 'update' s.id %}">Edit</a> <a href="{% url 'delete' s.id %}">Delete</a></td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+
+        
+     
+          
+        
+      
+            
+    </div>
+
+</div>
+
+</div>
+
+{% endblock content %}

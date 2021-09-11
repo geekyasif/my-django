@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+    <div class="alert alert-primary" role="alert">
+            <h4>Django Authentication SignUp Form</h4>
+        </div>
+    <form action="" method="POST">
+    {% csrf_token %}
+    {{sf.as_p}}
+    <button class="btn btn-primary " type="submit">Signup</button>
+    <a href="{% url 'login' %}" class="btn btn-primary ">Login</a>
+    </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+{% endblock content %}

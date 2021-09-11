@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container text-center my-5">
+
+
+{% if user.is_authenticated %}
+    <h1>Welcome {{user.username}} To Django Authentication application</h1>
+    <small>By Geeky Asif</small>
+
+{% else %}
+<h1>Welcome to Django Authentication App</h1>
+<small>By Geeky Asif</small>
+{% endif %}
+</div>
+{% endblock content %}
